@@ -14,3 +14,15 @@ describe('Ship', () => {
     expect(ship.port).toBe('Dover');
     });
  });
+
+ describe('Ship', () => {
+    it('ship can set sail', () => {
+    const ship = new Ship('Dover')
+
+    ship.setSail();
+
+    expect(ship.port).toBeFalsy;
+    });
+ });
+
+ 
