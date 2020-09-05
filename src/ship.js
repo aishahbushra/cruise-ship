@@ -1,33 +1,26 @@
 
-class Ship {
-    constructor(port) {
-        this.port = port;
-    }
+function Ship(port) {
+    this.currentPort = port;
+    this.startingPort = 'Dover';
+}   
+
+
+Ship.prototype = {
+    setSail () {
+        this.startingPort = 'Dover';
+
+},
+
+dock(port) {
+    this.currentPort = port;
+    console.log (port);
+    
+}
 }
 
 { const myShip = new Ship('Dover')
-    this.port = 'Dover'
+    this.currentPort = 'Dover';
 }
-
-Ship.prototype.setSail = function() {
-    if (this.port = "Dover") {
-        return false;
-    } else {
-    if (this.port = !'Dover') {
-        return true;
-    }
-    }
-}
-
-// let setSail() {
-//     if (this.port = "Dover") {
-//         return falsey;
-//     } else {
-//     if (this.port = !'Dover') {
-//         return truthy;
-//     }
-//     }
-//     };
 
 
 module.exports = Ship;
