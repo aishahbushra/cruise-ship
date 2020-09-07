@@ -1,26 +1,31 @@
 
-function Ship(port) {
-    this.currentPort = port;
+function Ship(itinerary) {
+    this.itinerary = itinerary;
+    this.currentPort = itinerary.ports[0];
     this.startingPort = 'Dover';
+    this.previousPort = null;
 }   
 
 
 Ship.prototype = {
     setSail () {
-        this.startingPort = 'Dover';
+        this.previousPort = this.currentPort;
+        this.currentPort = null;
 
 },
 
 dock(port) {
-    this.currentPort = port;
-    console.log (port);
+    const itinerary = this.itinerary;
+    const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
+
+     this.currentPort = itinerary.ports[previousPortIndex + 1];
     
 }
 }
 
-{ const myShip = new Ship('Dover')
-    this.currentPort = 'Dover';
-}
+// { const myShip = new Ship('Dover')
+//     this.currentPort = 'Dover';
+// }
 
 
 module.exports = Ship;
