@@ -1,33 +1,53 @@
-const Port = require('../src/port.js');
+const Port = require("../src/port");
 
-describe('Port', () => {
-    let port
+let parisHarbour;
+let portoHarbour;
+let nycDock;
+let cornwallHarbour;
 
- beforeEach(() => {
-    port = new Port('Dover');
- })
-
-
-    it('returns an object', () => {
-     expect(new Port()).toBeInstanceOf(Object);
-    });
-
-  
-    it('sets the name property', () => {
-    //   const port = new Port('Dover');
-  
-      expect(port.name).toEqual('Dover');
-    });
-
-    it('can remove a ship', () => {
-    //   const port = new Port('Dover');
-      const titanic = jest.fn();
-      const aishah = jest.fn();
-
-      port.addShip(titanic);
-      port.addShip(aishah);
-      port.removeShip(titanic)
-
-      expect(port.ships).toEqual([aishah]);
-    });
+describe("port class", () => {
+  beforeEach(() => {
+    parisHarbour = new Port("parisHarbour");
+    portoHarbour = new Port("portoHarbour");
+    nycDock = jest.fn();
+    cornwallHarbour = jest.fn();
   });
+
+  it("instantiates a port", () => {
+    expect(new Port(parisHarbour)).toBeInstanceOf(Object);
+  });
+
+  it("port has a name", () => {
+    expect(parisHarbour.portName).toBe("parisHarbour");
+  });
+
+  it("it can add ships", () => {
+    parisHarbour.ships = [];
+    expect(parisHarbour.ships).toBeInstanceOf(Array);
+    expect(parisHarbour.ships).toEqual([]);
+    expect(parisHarbour.addShip).toBeInstanceOf(Function);
+
+    parisHarbour.addShip(nycDock);
+    expect(parisHarbour.ships).toHaveLength(1);
+    expect(parisHarbour.ships).toEqual([nycDock]);
+  });
+
+  it("can remove ships", () => {
+    parisHarbour.ships = [];
+    expect(parisHarbour.removeShip).toBeInstanceOf(Function);
+
+    parisHarbour.addShip(nycDock);
+    expect(parisHarbour.ships).toHaveLength(1);
+    expect(parisHarbour.ships).toEqual([nycDock]);
+
+    parisHarbour.removeShip(nycDock);
+    expect(parisHarbour.ships).toEqual([]);
+
+    parisHarbour.addShip(nycDock);
+    parisHarbour.addShip(cornwallHarbour);
+    expect(parisHarbour.ships).toEqual([nycDock, cornwallHarbour]);
+
+    parisHarbour.removeShip(nycDock);
+    expect(parisHarbour.ships).toEqual([cornwallHarbour]);
+  });
+});

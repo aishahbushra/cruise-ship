@@ -1,18 +1,22 @@
 const Itinerary = require("../src/itinerary");
-const Ship = require('../src/ship.js');
-const Port = require('../src/port.js');
 
-describe('Itinerary', () => {
-    it('returns an object', () => {
-     expect(new Itinerary()).toBeInstanceOf(Object);
-    });
+let parisHarbour;
+let portoHarbour;
+let itinerary;
 
-    it('can have ports', () => {
-     const dover = jest.fn();
-     const calais = jest.fn();
+describe("Itinerary", () => {
+  beforeEach(() => {
+    parisHarbour = jest.fn();
+    portoHarbour = jest.fn();
+    itinerary = new Itinerary([parisHarbour, portoHarbour]);
+  });
 
-     const itinerary = new Itinerary([dover, calais]);
+  it("instantiates an itinerary", () => {
+    expect(itinerary).toBeInstanceOf(Object);
+    expect(itinerary).toHaveProperty("ports");
+  });
 
-     expect(itinerary.ports).toEqual([dover, calais]);
-    })
- });
+  it("has an array of two ports", () => {
+    expect(itinerary.ports).toEqual([parisHarbour, portoHarbour]);
+  });
+});
